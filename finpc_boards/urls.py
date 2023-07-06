@@ -22,6 +22,7 @@ from app import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name="index"),
-    path("example/<str:param>/", views.example_with_params, name="example_with_params"),
-    re_path(r"^example/(?P<param>act_.+)/$", views.example_detail, name="example_detail_url"),
+    path("boards/", views.board_view, name="boards"),
+    path("posts/", views.PostsHandler.as_view(), name="posts"),
+    path("posts/<int:pk>/", views.PostHandler.as_view(), name="posts"),
 ]
