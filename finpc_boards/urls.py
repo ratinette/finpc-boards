@@ -21,6 +21,7 @@ from app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", views.index, name="index"),
     path("boards/", views.board_view, name="boards"),
     path("posts/", views.PostsHandler.as_view(), name="posts"),
     path("posts/<int:pk>/", views.PostHandler.as_view(), name="posts"),

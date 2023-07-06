@@ -1,3 +1,6 @@
+from django.http import HttpResponse
+
+from datetime import datetime
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views import View
@@ -6,7 +9,21 @@ from django.views.decorators.csrf import csrf_exempt
 from app.models import Board
 
 
-# Create your views here.
+
+def index(request):
+    rendering_info = dict(
+        title="Home",
+        user_id=1,
+        date_joined=datetime(2022, 1, 1, 0, 0, 0),
+        category_list=[1, 2, 3],
+        price=1000,
+        note=None,
+        msg="Hello World",
+        java="Java",
+        python="Python",
+    )
+
+    return render(request, "index.html", rendering_info)
 
 
 @csrf_exempt
