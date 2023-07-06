@@ -21,7 +21,7 @@ from app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("example/", views.example, name="example"),
+    path("", views.index, name="index"),
     path("example/<str:param>/", views.example_with_params, name="example_with_params"),
     re_path(r"^example/(?P<param>act_.+)/$", views.example_detail, name="example_detail_url"),
 ]
