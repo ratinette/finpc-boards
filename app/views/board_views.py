@@ -60,7 +60,7 @@ class PostsHandler(View):
         form = CreatePostForm(request.POST)
         if form.is_valid():
             saved_form = form.save(user=request.user)
-            return redirect("posts", pk=saved_form.id)
+            return redirect("post", pk=saved_form.id)
         return render(request, "create_post.html", {"form": form})
 
 
@@ -71,7 +71,7 @@ def edit_post(request, pk):
         form = CreatePostForm(request.POST, instance=post)
         if form.is_valid():
             form.save(user=request.user)
-            return redirect("posts", pk=pk)
+            return redirect("post", pk=pk)
     else:
         form = CreatePostForm(instance=post)
 
