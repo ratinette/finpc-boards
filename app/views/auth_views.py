@@ -36,4 +36,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("index")  # 로그아웃 후 홈 페이지로 이동
+    return redirect("boards")  # 로그아웃 후 홈 페이지로 이동

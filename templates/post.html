@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시글 상세</title>
+    <style>
+        /* 스타일링을 위한 CSS 코드 */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            margin-bottom: 10px;
+        }
+        .date-author {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .content {
+            white-space: pre-line;
+        }
+        .back-button {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function goToBoard() {
+            window.location.href = '/boards/?id={{ post.board.id }}';
+        }
+        function editPost() {
+            window.location.href = '/posts/{{ post.id }}/edit';
+        }
+        function deletePost() {
+            const c = confirm("정말 삭제하시겠습니까?");
+            if (c) {
+                window.location.href = '/posts/{{ post.id }}/delete';
+            }
+        }
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goToBoard()">돌아가기</button>
+    {% if user.id == post.author_id %}
+    <button onclick="editPost()">수정</button>
+    <button onclick="deletePost()">삭제</button>
+    {% endif %}
+    <div class="header">
+        <h1>{{ post.title }}</h1>
+    </div>
+    <div class="date-author">
+        작성일: {{ post.created_at }} | 작성자: {{ post.author.username }}
+    </div>
+    <div class="content">
+      {{ post.content }}
+    </div>
+</body>
+</html>

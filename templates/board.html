@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시판</title>
+    <style>
+        /* 스타일링을 위한 CSS 코드 */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            background-color: #f2f2f2;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-id {
+            margin-right: 10px;
+        }
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .new-post-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+          {% for board in board_list %}
+            <button onclick="window.location.href = '{% url 'boards' %}?id={{ board.id }}'">{{ board.title }}</button>
+          {% endfor %}
+          <button class="new-post-btn" onclick="window.location.href='{% url 'posts' %}'">+ 새 글 쓰기</button>
+        </div>
+        <div>
+          {% if user.is_authenticated %}
+            <b><span class="user-id">{{ user.username }}</span></b>
+            <button class="logout-btn" onclick="window.location.href='{% url 'logout' %}'">로그아웃</button>
+          {% else %}
+            <button  onclick="window.location.href='{% url 'login' %}'">로그인</button>
+          {% endif %}
+
+        </div>
+    </nav>
+
+    <div>
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>글 제목</th>
+                <th>작성자</th>
+                <th>작성 시간</th>
+            </tr>
+          {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td><a href="/posts/{{ post.id }}">{{ post.title }}</a></td>
+                <td>{{ post.author.username }}</td>
+                <td>{{ post.created_at }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4" style="text-align: center;">아직 게시된 글이 없습니다.</td>
+            </tr>
+          {% endfor %}
+
+        </table>
+    </div>
+</body>
+</html>
