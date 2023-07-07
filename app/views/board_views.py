@@ -9,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt
 from app.models import Board
 
 
-
 def index(request):
     rendering_info = dict(
         title="Home",
